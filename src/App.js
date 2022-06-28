@@ -1,22 +1,65 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import General from "./components/General";
 
+
 class App extends Component {
-render() {
-  return (
-    <div className="App">
-      <General />
-      <Education />
-      <Experience />
-    </div>
-  )
-}
+  constructor(props){
+    super(props)
+    this.state = {
+     general: {
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
+      phoneNumber: ""
+     },
+     experience: {
+      company: "",
+      position: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+     },
+     education: {
+      school: "",
+      degree: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+     }
+    }
+  }
+
+  handleInputValue = (event) => {
+    this.setState({
+      general: { 
+        ...this.state.general,
+        [event.target.name]: event.target.value
+      },
+      experience: { 
+        ...this.state.experience,
+        [event.target.name]: event.target.value
+      },
+      education: { 
+        ...this.state.education,
+        [event.target.name]: event.target.value
+      }
+    })
+  }
+
+	render() {
+		return (
+      <form>
+        <General handleInput={this.handleInputValue}/>
+        <Experience handleInput={this.handleInputValue}/>
+        <Education handleInput={this.handleInputValue} />
+      </form>
+		)
+	}
 }
 
 export default App;
-
 
 // You should use class components for this project. You’re going to find a lot of code written using class components and this practical experience will help you understand it when encountered. You’ll also revisit this project in a later lesson to replace the class components with functional ones.
 // Think about how to structure your application into components. Your application should include:
