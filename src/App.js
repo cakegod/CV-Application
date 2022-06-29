@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import General from "./components/General";
+import EducationView from "./components/Viewer/EducationView";
+import GeneralViewer from "./components/Viewer/GeneralViewer";
+import ExperienceViewer from "./components/Viewer/ExperienceViewer";
+import "./styles/app.css";
 
 
 class App extends Component {
@@ -47,14 +51,23 @@ class App extends Component {
       }
     })
   }
+  
 
 	render() {
 		return (
-      <form>
-        <General handleInput={this.handleInputValue}/>
-        <Experience handleInput={this.handleInputValue}/>
-        <Education handleInput={this.handleInputValue} />
-      </form>
+      <div class="container">
+        <form>
+          <General handleInput={this.handleInputValue}/>
+          <Experience handleInput={this.handleInputValue}/>
+          <Education handleInput={this.handleInputValue} />
+          <button>Submit CV</button>
+        </form>
+        <div class="cv-viewer">
+          <GeneralViewer/>
+          <EducationView/>
+          <ExperienceViewer/>
+        </div>
+      </div>
 		)
 	}
 }

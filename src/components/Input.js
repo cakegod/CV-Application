@@ -6,7 +6,7 @@ export default class Input extends Component {
 
 		return (
 			<div>
-				<label>{label}</label>
+				<label class="label">{label}</label>
 				<input type='text' onChange={handleInput} name={name} />
 			</div>
 		);
