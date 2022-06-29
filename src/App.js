@@ -1,74 +1,64 @@
 import React, { Component } from 'react';
-import Education from "./components/Education";
-import Experience from "./components/Experience";
-import General from "./components/General";
-import EducationView from "./components/Viewer/EducationView";
-import GeneralViewer from "./components/Viewer/GeneralViewer";
-import ExperienceViewer from "./components/Viewer/ExperienceViewer";
-import "./styles/app.css";
-
+import Education from './components/Form/Education';
+import Experience from './components/Form/Experience';
+import General from './components/Form/General';
+import EducationView from './components/Viewer/EducationView';
+import GeneralViewer from './components/Viewer/GeneralViewer';
+import ExperienceViewer from './components/Viewer/ExperienceViewer';
+import './styles/app.css';
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-     general: {
-      firstName: "",
-      lastName: "",
-      emailAddress: "",
-      phoneNumber: ""
-     },
-     experience: {
-      company: "",
-      position: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-     },
-     education: {
-      school: "",
-      degree: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-     }
-    }
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			// General
+			firstName: '',
+			lastName: '',
+			emailAddress: '',
+			phoneNumber: '',
 
-  handleInputValue = (event) => {
-    this.setState({
-      general: { 
-        ...this.state.general,
-        [event.target.name]: event.target.value
-      },
-      experience: { 
-        ...this.state.experience,
-        [event.target.name]: event.target.value
-      },
-      education: { 
-        ...this.state.education,
-        [event.target.name]: event.target.value
-      }
-    })
-  }
-  
+			// Experience
+			company: '',
+			position: '',
+			workDescription: '',
+			workStartDate: '',
+			workEndDate: '',
+
+			// Education
+			school: '',
+			degree: '',
+			degreeDescription: '',
+			degreeStartDate: '',
+			degreeEndDate: '',
+		};
+	}
+
+	handleInputValue = (event) => {
+		const { name, value } = event.target;
+		this.setState({
+			[name]: value,
+		});
+	};
 
 	render() {
 		return (
-      <div class="container">
-        <form>
-          <General handleInput={this.handleInputValue}/>
-          <Experience handleInput={this.handleInputValue}/>
-          <Education handleInput={this.handleInputValue} />
-          <button>Submit CV</button>
-        </form>
-        <div class="cv-viewer">
-          <GeneralViewer/>
-          <EducationView/>
-          <ExperienceViewer/>
-        </div>
-      </div>
-		)
+			<div className='container'>
+				<form>
+					<General
+						handleInput={this.handleInputValue}
+						value={this.state}
+					></General>
+					<Experience handleInput={this.handleInputValue} value={this.state} />
+					<Education handleInput={this.handleInputValue} value={this.state} />
+					<button className='submit-button'>Submit CV</button>
+				</form>
+				<div className='cv-viewer'>
+					<GeneralViewer />
+					<EducationView />
+					<ExperienceViewer />
+				</div>
+			</div>
+		);
 	}
 }
 
