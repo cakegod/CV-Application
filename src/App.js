@@ -122,10 +122,30 @@ class App extends Component {
 			default:
 		}
 	};
+	handleEdit = (id, section) => {
+		if (section === 'experience') {
+			const index = this.state.experienceArray.findIndex(
+				(item) => item.id === id,
+			);
+			this.setState({
+				experience: {
+					...this.state.experienceArray[index],
+				},
+			});
+		} else if (section === 'education') {
+			const index = this.state.educationArray.findIndex(
+				(item) => item.id === id,
+			);
+			this.setState({
+				education: {
+					...this.state.educationArray[index],
+				},
+			});
+		}
+	};
 
 	render() {
-		const { general, education, experience, experienceArray, educationArray } =
-			this.state;
+		const { general, experienceArray, educationArray } = this.state;
 		return (
 			<div className='container'>
 				<div className='forms-container'>
@@ -150,8 +170,11 @@ class App extends Component {
 				</div>
 				<div className='cv-viewer'>
 					<GeneralViewer data={general} />
-					<ExperienceViewer data={experience} arrayData={experienceArray} />
-					<EducationView data={education} arrayData={educationArray} />
+					<ExperienceViewer
+						arrayData={experienceArray}
+						edit={this.handleEdit}
+					/>
+					<EducationView arrayData={educationArray} edit={this.handleEdit} />
 				</div>
 			</div>
 		);

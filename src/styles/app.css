@@ -78,8 +78,7 @@ input {
 	height: 30px;
 }
 
-.submit-button,
-.edit-button {
+button {
 	color: #ecf0f1;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -92,8 +91,7 @@ input {
 	transition: 0.2s;
 }
 
-.submit-button:hover,
-.edit-button:hover {
+button:hover{
 	filter: saturate(1.4);
 	transition: 0.2s;
 }
@@ -125,7 +123,7 @@ input {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  overflow-wrap: anywhere;
+
   align-items: center;
 }
 
@@ -158,12 +156,12 @@ p {
 
 .work-info-container {
   box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
-  padding: 15px;
+  padding: 7px 10px;
   background-color: #34495e
 }
 
 .position{
-  color: #27ae60
+  color: #16a085;
 }
 
 .work-date > p {
@@ -176,6 +174,11 @@ p {
   padding-left: 15px;
 }
 
+
+.edit-button {
+	background-color:#e67e22;
+}
+
 /* General viewer */
 
 .first-name, .last-name {
@@ -185,3 +188,5 @@ p {
   font-weight: 600;
   text-transform: uppercase;
 }
+
+
