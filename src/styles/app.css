@@ -1,59 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 * {
-  box-sizing: border-box;
-  color: white;
-  font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+	box-sizing: border-box;
+	color: white;
+	font-size: 16px;
+	font-family: 'Montserrat', sans-serif;
 }
-
 
 :root {
-  --primaryMain: #546e7a
-  --primarySecondary
+	--primaryMain: #546e7a --primarySecondary;
 }
 
-body, html, #root {
+body,
+html,
+#root {
 	height: 100%;
 	width: 100%;
 }
 
 body {
-  background-color: #161f29;
+	background-color: #161f29;
 }
 
 .container {
-	height: 100%;
-	margin: 0 10%;
-  padding: 2% 0;
+	margin: 3% 7%;
 	display: flex;
-	align-items: center;
 }
-
-
 
 .cv-viewer {
 	background-color: #2c3e50;
-  margin-left: 15px;
-  border-radius: 5px;
-
+	margin-left: 15px;
+	border-radius: 5px;
+	height: 100vh;
 }
 
-form, .cv-viewer {
+.forms-container,
+.cv-viewer {
 	display: flex;
 	flex-direction: column;
 	width: 50%;
-	height:100%;
+
 }
 
 form > div {
 	display: flex;
 	flex-direction: column;
-  border-radius: 5px;
+	border-radius: 5px;
 	margin: 0 0 10px 0;
 	padding: 20px;
-  background-color: #2c3e50;
-  font-weight:bold;
+	background-color: #2c3e50;
+	font-weight: bold;
 }
 
 form > div > div {
@@ -62,36 +58,130 @@ form > div > div {
 }
 
 .label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 5px 0 2px 0;
-  font-weight:600;
-  color: #ecf0f1;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 10px 0 2px 0;
+	font-weight: 600;
+	color: #ecf0f1;
+}
+
+input,
+textarea {
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #364c63;
+	border: 0;
 }
 
 input {
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #364c63;
-  border: 0;
+	height: 30px;
+}
+
+.submit-button,
+.edit-button {
+	color: #ecf0f1;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 1.1rem;
+	background-color: #16a085;
+	border: 0;
+	border-radius: 5px;
+	height: 35px;
+  margin-top: 20px;
+	transition: 0.2s;
+}
+
+.submit-button:hover,
+.edit-button:hover {
+	filter: saturate(1.4);
+	transition: 0.2s;
+}
+
+.edit-button {
+	background-color: #d35400;
+}
+
+.cv-viewer {
+	display: grid;
+  font-size: 16px;
+	grid-template-columns: 2fr 3fr;
+	grid-template-rows: repeat(2, 1fr);
+	gap: 0 0;
+	grid-auto-flow: row;
+	grid-template-areas:
+		'general-view-container experience-view-container'
+		'general-view-container education-view-container';
+}
+
+.experience-view-container {
+	grid-area: experience-view-container;
+  padding: 30px 50px 0 20px;
+
+}
+
+.experience-view-container > div{
+
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  overflow-wrap: anywhere;
+  align-items: center;
+}
+
+.education-view-container {
+	grid-area: education-view-container;
+  padding: 30px 50px 0 20px;
+}
+
+.general-view-container {
+	grid-area: general-view-container;
+  padding: 30px 20px 0 50px;
+  border-right: 1px solid black;
+}
+
+p {
+  margin:3px 0;
 }
 
 
-.submit-button {
-  color: #ecf0f1;
-  text-transform: uppercase;
+/* Experience */
+
+.company, .position {
   font-weight: 700;
-  font-size: 1.1rem;
-  background-color: #16a085;
-  border: 0;
-  border-radius: 5px;
-  height: 40px;
-  flex:1
+
 }
 
-.submit-button:hover {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: 0.2s;
-  
+.company {
+  text-transform: uppercase;
+}
+
+.work-info-container {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+  padding: 15px;
+  background-color: #34495e
+}
+
+.position{
+  color: #27ae60
+}
+
+.work-date > p {
+  font-size: 0.8rem;
+}
+
+
+.work-info {
+  flex:1;
+  padding-left: 15px;
+}
+
+/* General viewer */
+
+.first-name, .last-name {
+  font-size: 1.2rem
+}
+.last-name {
+  font-weight: 600;
+  text-transform: uppercase;
 }

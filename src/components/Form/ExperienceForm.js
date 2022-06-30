@@ -1,46 +1,50 @@
 import React, { Component } from 'react';
 import Input from './Input';
 
-export default class Experience extends Component {
+export default class ExperienceForm extends Component {
 	render() {
-		const { handleInput, value } = this.props;
+		const { handleInput } = this.props;
+		const { company, position, workDescription, workStartDate, workEndDate } =
+			this.props.value.experience;
 		return (
 			<div className='experience-container'>
 				<Input
-					type='text'
-					value={value.company}
 					label={'Company Name'}
+					type='text'
+					value={company}
 					handleInput={handleInput}
 					name='company'
 				/>
 				<Input
-					type='text'
-					value={value.position}
 					label={'Position'}
+					type='text'
+					value={position}
 					handleInput={handleInput}
 					name='position'
 				/>
 				<Input
-					type='text'
-					value={value.workDescription}
 					label={'Description'}
+					inputType='textarea'
+					type='text'
+					value={workDescription}
 					handleInput={handleInput}
 					name='workDescription'
 				/>
 				<Input
-					type='date'
-					value={value.workStartDate}
 					label={'Start Date'}
+					type='date'
+					value={workStartDate}
 					handleInput={handleInput}
 					name='workStartDate'
 				/>
 				<Input
-					type='date'
 					label={'End Date'}
-					value={value.workEndDate}
+					type='date'
+					value={workEndDate}
 					handleInput={handleInput}
 					name='workEndDate'
 				/>
+				<button className='submit-button'>Submit</button>
 			</div>
 		);
 	}

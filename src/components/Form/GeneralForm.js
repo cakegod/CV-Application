@@ -1,37 +1,45 @@
 import React, { Component } from 'react';
 import Input from './Input';
 
-export default class General extends Component {
-
+export default class GeneralForm extends Component {
 	render() {
-		const { handleInput, value } = this.props;
+		const { handleInput } = this.props;
+		const { firstName, lastName, address, emailAddress, phoneNumber } =
+			this.props.value.general;
 		return (
 			<div className='general-container'>
 				<Input
-					type='text'
-          value={value.firstName}
 					label={'First Name'}
+					type='text'
+					value={firstName}
 					handleInput={handleInput}
 					name='firstName'
 				/>
 				<Input
-					type='text'
-          value={value.lastName}
 					label={'Last Name'}
+					type='text'
+					value={lastName}
 					handleInput={handleInput}
 					name='lastName'
 				/>
 				<Input
-					type='email'
-          value={value.emailAddress}
+					label={'Address'}
+					type='text'
+					value={address}
+					handleInput={handleInput}
+					name='address'
+				/>
+				<Input
 					label={'Email Address'}
+					type='email'
+					value={emailAddress}
 					handleInput={handleInput}
 					name='emailAddress'
 				/>
 				<Input
-					type='text'
-          value={value.phoneNumber}
 					label={'Phone Number'}
+					type='text'
+					value={phoneNumber}
 					handleInput={handleInput}
 					name='phoneNumber'
 				/>

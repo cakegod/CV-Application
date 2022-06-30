@@ -1,46 +1,55 @@
 import React, { Component } from 'react';
 import Input from './Input';
 
-export default class Education extends Component {
+export default class EducationForm extends Component {
 	render() {
-		const { handleInput, value } = this.props;
+		const { handleInput } = this.props;
+		const {
+			school,
+			degree,
+			degreeDescription,
+			degreeStartDate,
+			degreeEndDate,
+		} = this.props.value.education;
 		return (
 			<div className='education-container'>
 				<Input
-					type='text'
-					value={value.school}
 					label={'School Name'}
+					type='text'
+					value={school}
 					handleInput={handleInput}
 					name='school'
 				/>
 				<Input
-					type='text'
-					value={value.degree}
 					label={'Degree'}
+					type='text'
+					value={degree}
 					handleInput={handleInput}
 					name='degree'
 				/>
 				<Input
-					type='text'
-					value={value.degreeDescription}
 					label={'Description'}
+					inputType='textarea'
+					type='text'
 					handleInput={handleInput}
+					value={degreeDescription}
 					name='degreeDescription'
 				/>
 				<Input
-					type='date'
-					value={value.degreeStartDate}
 					label={'Start Date'}
+					type='date'
+					value={degreeStartDate}
 					handleInput={handleInput}
 					name='degreeStartDate'
 				/>
 				<Input
-					type='date'
-					value={value.degreeEndDate}
 					label={'End Date'}
+					type='date'
+					value={degreeEndDate}
 					handleInput={handleInput}
 					name='degreeEndDate'
 				/>
+				<button className='submit-button'>Submit</button>
 			</div>
 		);
 	}
