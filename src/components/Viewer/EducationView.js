@@ -20,7 +20,7 @@ export default class EducationView extends Component {
 							></button>
 							Delete
 							<div className='education-info'>
-								<p className='school'>{education.company}</p>
+								<p className='school'>{education.school}</p>
 								<p className='degree'>{education.degree}</p>
 								<p className='education-description'>
 									{education.degreeDescription}
