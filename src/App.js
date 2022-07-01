@@ -39,6 +39,7 @@ class App extends Component {
 			},
 			experienceArray: [],
 			educationArray: [],
+			isEditMode: false,
 		};
 	}
 
@@ -86,14 +87,27 @@ class App extends Component {
 			default:
 		}
 	};
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 		switch (event.target.name) {
 			case 'experience':
+				if (!this.state.isEditMode) {
+					this.setState({
+						experienceArray: this.state.experienceArray.concat(
+							this.state.experience,
+						),
+					});
+				} else {
+					const index = this.state.experienceArray.findIndex(
+						(item) => item.id === this.state.experience.id,
+					);
+					this.state.experienceArray.splice(index, 1, {
+						...this.state.experience,
+					});
+					this.setState({ isEditMode: false });
+				}
 				this.setState({
-					experienceArray: this.state.experienceArray.concat(
-						this.state.experience,
-					),
 					experience: {
 						company: '',
 						position: '',
@@ -105,10 +119,22 @@ class App extends Component {
 				});
 				break;
 			case 'education':
+				if (!this.state.isEditMode) {
+					this.setState({
+						educationArray: this.state.educationArray.concat(
+							this.state.education,
+						),
+					});
+				} else {
+					const index = this.state.educationArray.findIndex(
+						(item) => item.id === this.state.education.id,
+					);
+					this.state.educationArray.splice(index, 1, {
+						...this.state.education,
+					});
+					this.setState({ isEditMode: false });
+				}
 				this.setState({
-					educationArray: this.state.educationArray.concat(
-						this.state.education,
-					),
 					education: {
 						school: '',
 						degree: '',
@@ -122,6 +148,27 @@ class App extends Component {
 			default:
 		}
 	};
+
+	handleRemove = (id, section) => {
+		if (section === 'experience') {
+			const index = this.state.experienceArray.findIndex(
+				(item) => item.id === id,
+			);
+			this.state.experienceArray.splice(index, 1);
+			this.setState({
+				...this.state.experienceArray,
+			});
+		} else if (section === 'education') {
+			const index = this.state.educationArray.findIndex(
+				(item) => item.id === id,
+			);
+			this.state.educationArray.splice(index, 1);
+			this.setState({
+				...this.state.educationArray,
+			});
+		}
+	};
+
 	handleEdit = (id, section) => {
 		if (section === 'experience') {
 			const index = this.state.experienceArray.findIndex(
@@ -142,6 +189,9 @@ class App extends Component {
 				},
 			});
 		}
+		this.setState({
+			isEditMode: true,
+		});
 	};
 
 	render() {
@@ -173,8 +223,13 @@ class App extends Component {
 					<ExperienceViewer
 						arrayData={experienceArray}
 						edit={this.handleEdit}
+						remove={this.handleRemove}
 					/>
-					<EducationView arrayData={educationArray} edit={this.handleEdit} />
+					<EducationView
+						arrayData={educationArray}
+						edit={this.handleEdit}
+						remove={this.handleRemove}
+					/>
 				</div>
 			</div>
 		);

@@ -9,14 +9,22 @@ export default class EducationView extends Component {
 						<div key={education.id} className='education-info-container'>
 							<button
 								className='edit-button'
-								onClick={() => this.props.edit(education.id, "education")}
+								onClick={() => this.props.edit(education.id, 'education')}
 							>
+						
 								Edit
 							</button>
+							<button
+								className='remove-button'
+								onClick={() => this.props.remove(education.id, 'education')}
+							></button>
+							Delete
 							<div className='education-info'>
 								<p className='school'>{education.company}</p>
 								<p className='degree'>{education.degree}</p>
-								<p className='education-description'>{education.degreeDescription}</p>
+								<p className='education-description'>
+									{education.degreeDescription}
+								</p>
 							</div>
 							<div className='education-date'>
 								<p>{education.degreeStartDate}</p>

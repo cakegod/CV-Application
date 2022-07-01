@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from './Input';
 
 export default class ExperienceForm extends Component {
+
 	render() {
 		const { handleInput } = this.props;
 		const { company, position, workDescription, workStartDate, workEndDate } =

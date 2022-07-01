@@ -10,8 +10,13 @@ export default class ExperienceViewer extends Component {
 							<button
 								className='edit-button'
 								onClick={() => this.props.edit(experience.id, "experience")}
-							>
-								Edit
+							>Edit
+								</button>
+									<button
+								className='remove-button'
+								onClick={() => this.props.remove(experience.id, "experience")}
+							>Delete
+								
 							</button>
 							<div className='work-info'>
 								<p className='company'>{experience.company}</p>
