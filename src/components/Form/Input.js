@@ -1,9 +1,7 @@
 import React from 'react';
 
-const Input = (props) => {
-	const { label, handleInput, name, type, value } = props;
-
-	if (props.inputType === 'textarea') {
+const Input = ({ label, handleInput, name, type, value, inputType }) => {
+	if (inputType === 'textarea') {
 		return (
 			<div>
 				<label className='label'>{label}</label>

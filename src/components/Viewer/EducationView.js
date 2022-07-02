@@ -1,20 +1,20 @@
 import React from 'react';
 
-const EducationView = (props) => {
+const EducationView = ({arrayData, edit, remove}) => {
 	return (
 		<div className='education-view-container'>
-			{props.arrayData?.map((education) => {
+			{arrayData?.map((education) => {
 				return (
 					<div key={education.id} className='education-info-container'>
 						<button
 							className='edit-button'
-							onClick={() => props.edit(education.id, 'education')}
+							onClick={() => edit(education.id, 'education')}
 						>
 							Edit
 						</button>
 						<button
 							className='remove-button'
-							onClick={() => props.remove(education.id, 'education')}
+							onClick={() => remove(education.id, 'education')}
 						></button>
 						Delete
 						<div className='education-info'>

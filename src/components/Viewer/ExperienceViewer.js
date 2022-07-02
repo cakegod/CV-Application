@@ -1,20 +1,20 @@
 import React from 'react';
 
-const ExperienceViewer = (props) => {
+const ExperienceViewer = ({arrayData, edit, remove}) => {
 	return (
 		<div className='experience-view-container'>
-			{props.arrayData?.map((experience) => {
+			{arrayData?.map((experience) => {
 				return (
 					<div key={experience.id} className='work-info-container'>
 						<button
 							className='edit-button'
-							onClick={() => props.edit(experience.id, 'experience')}
+							onClick={() => edit(experience.id, 'experience')}
 						>
 							Edit
 						</button>
 						<button
 							className='remove-button'
-							onClick={() => props.remove(experience.id, 'experience')}
+							onClick={() => remove(experience.id, 'experience')}
 						>
 							Delete
 						</button>
