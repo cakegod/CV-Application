@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Input extends Component {
-	render() {
-		const { label, handleInput, name, type, value } = this.props;
+const Input = (props) => {
+	const { label, handleInput, name, type, value } = props;
 
-		if (this.props.inputType === 'textarea') {
-			return (
-				<div>
-					<label className='label'>{label}</label>
-					<textarea
-						value={value}
-						type={type}
-						onChange={handleInput}
-						name={name}
-						required
-					/>
-				</div>
-			);
-		} else {
-			return (
-				<div>
-					<label className='label'>{label}</label>
-					<input
-						value={value}
-						type={type}
-						onChange={handleInput}
-						name={name}
-						required
-					/>
-				</div>
-			);
-		}
+	if (props.inputType === 'textarea') {
+		return (
+			<div>
+				<label className='label'>{label}</label>
+				<textarea
+					value={value}
+					type={type}
+					onChange={handleInput}
+					name={name}
+					required
+				/>
+			</div>
+		);
+	} else {
+		return (
+			<div>
+				<label className='label'>{label}</label>
+				<input
+					value={value}
+					type={type}
+					onChange={handleInput}
+					name={name}
+					required
+				/>
+			</div>
+		);
 	}
-}
+};
+
+export default Input;

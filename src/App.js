@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import EducationForm from './components/Form/EducationForm';
 import ExperienceForm from './components/Form/ExperienceForm';
 import GeneralForm from './components/Form/GeneralForm';
@@ -8,42 +8,38 @@ import ExperienceViewer from './components/Viewer/ExperienceViewer';
 import './styles/app.css';
 import uniqid from 'uniqid';
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			general: {
-				firstName: '',
-				lastName: '',
-				address: '',
-				emailAddress: '',
-				phoneNumber: '',
-			},
+const App = () => {
+	const [general, setGeneral] = useState({
+		firstName: '',
+		lastName: '',
+		address: '',
+		emailAddress: '',
+		phoneNumber: '',
+	});
 
-			experience: {
-				company: '',
-				position: '',
-				workDescription: '',
-				workStartDate: '',
-				workEndDate: '',
-				id: uniqid(),
-			},
+	const [experience, setExperience] = useState({
+		company: '',
+		position: '',
+		workDescription: '',
+		workStartDate: '',
+		workEndDate: '',
+		id: uniqid(),
+	});
 
-			education: {
-				school: '',
-				degree: '',
-				degreeDescription: '',
-				degreeStartDate: '',
-				degreeEndDate: '',
-				id: uniqid(),
-			},
-			experienceArray: [],
-			educationArray: [],
-			isEditMode: false,
-		};
-	}
+	const [education, setEducation] = useState({
+		school: '',
+		degree: '',
+		degreeDescription: '',
+		degreeStartDate: '',
+		degreeEndDate: '',
+		id: uniqid(),
+	});
 
-	handleInputValue = (event) => {
+	const [experienceArray, setExperienceArray] = useState([]);
+	const [educationArray, setEducationArray] = useState([]);
+	const [isEditMode, setIsEditMode] = useState(false);
+
+	const handleInputValue = (event) => {
 		const { name, value } = event.target;
 		switch (name) {
 			case 'firstName':
@@ -51,11 +47,9 @@ class App extends Component {
 			case 'address':
 			case 'emailAddress':
 			case 'phoneNumber':
-				this.setState({
-					general: {
-						...this.state.general,
-						[name]: value,
-					},
+				setGeneral({
+					...general,
+					[name]: value,
 				});
 				break;
 			case 'company':
@@ -63,12 +57,10 @@ class App extends Component {
 			case 'workDescription':
 			case 'workStartDate':
 			case 'workEndDate':
-				this.setState({
-					experience: {
-						...this.state.experience,
-						[name]: value,
-						id: this.state.experience.id,
-					},
+				setExperience({
+					...experience,
+					[name]: value,
+					id: experience.id,
 				});
 				break;
 			case 'school':
@@ -76,175 +68,115 @@ class App extends Component {
 			case 'degreeDescription':
 			case 'degreeStartDate':
 			case 'degreeEndDate':
-				this.setState({
-					education: {
-						...this.state.education,
-						[name]: value,
-						id: this.state.education.id,
-					},
+				setEducation({
+					...education,
+					[name]: value,
+					id: education.id,
 				});
 				break;
 			default:
 		}
 	};
 
-	handleSubmit = (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		switch (event.target.name) {
 			case 'experience':
-				if (!this.state.isEditMode) {
-					this.setState({
-						experienceArray: this.state.experienceArray.concat(
-							this.state.experience,
-						),
-					});
+				if (!isEditMode) {
+					setExperienceArray(experienceArray.concat(experience));
 				} else {
-					const index = this.state.experienceArray.findIndex(
-						(item) => item.id === this.state.experience.id,
+					const index = experienceArray.findIndex(
+						(item) => item.id === experience.id,
 					);
-					this.state.experienceArray.splice(index, 1, {
-						...this.state.experience,
-					});
-					this.setState({ isEditMode: false });
+					experienceArray.splice(index, 1, experience);
+					setIsEditMode(false);
 				}
-				this.setState({
-					experience: {
-						company: '',
-						position: '',
-						workDescription: '',
-						workStartDate: '',
-						workEndDate: '',
-						id: uniqid(),
-					},
+				setExperience({
+					company: '',
+					position: '',
+					workDescription: '',
+					workStartDate: '',
+					workEndDate: '',
+					id: uniqid(),
 				});
 				break;
 			case 'education':
-				if (!this.state.isEditMode) {
-					this.setState({
-						educationArray: this.state.educationArray.concat(
-							this.state.education,
-						),
-					});
+				if (!isEditMode) {
+					setEducationArray(educationArray.concat(education));
 				} else {
-					const index = this.state.educationArray.findIndex(
-						(item) => item.id === this.state.education.id,
+					const index = educationArray.findIndex(
+						(item) => item.id === education.id,
 					);
-					this.state.educationArray.splice(index, 1, {
-						...this.state.education,
-					});
-					this.setState({ isEditMode: false });
+					educationArray.splice(index, 1, education);
+					setEducation(false);
 				}
-				this.setState({
-					education: {
-						school: '',
-						degree: '',
-						degreeDescription: '',
-						degreeStartDate: '',
-						degreeEndDate: '',
-						id: uniqid(),
-					},
+				setEducation({
+					school: '',
+					degree: '',
+					degreeDescription: '',
+					degreeStartDate: '',
+					degreeEndDate: '',
+					id: uniqid(),
 				});
 				break;
 			default:
 		}
 	};
 
-	handleRemove = (id, section) => {
+	const handleRemove = (id, section) => {
 		if (section === 'experience') {
-			const index = this.state.experienceArray.findIndex(
-				(item) => item.id === id,
-			);
-			this.state.experienceArray.splice(index, 1);
-			this.setState({
-				...this.state.experienceArray,
-			});
+			const index = experienceArray.findIndex((item) => item.id === id);
+			experienceArray.splice(index, 1);
+			setExperienceArray(...experienceArray);
 		} else if (section === 'education') {
-			const index = this.state.educationArray.findIndex(
-				(item) => item.id === id,
-			);
-			this.state.educationArray.splice(index, 1);
-			this.setState({
-				...this.state.educationArray,
-			});
+			const index = educationArray.findIndex((item) => item.id === id);
+			educationArray.splice(index, 1);
+			setEducationArray(...educationArray);
 		}
 	};
 
-	handleEdit = (id, section) => {
+	const handleEdit = (id, section) => {
 		if (section === 'experience') {
-			const index = this.state.experienceArray.findIndex(
-				(item) => item.id === id,
-			);
-			this.setState({
-				experience: {
-					...this.state.experienceArray[index],
-				},
-			});
+			const index = experienceArray.findIndex((item) => item.id === id);
+			setExperience(experienceArray[index]);
 		} else if (section === 'education') {
-			const index = this.state.educationArray.findIndex(
-				(item) => item.id === id,
-			);
-			this.setState({
-				education: {
-					...this.state.educationArray[index],
-				},
-			});
+			const index = educationArray.findIndex((item) => item.id === id);
+			setEducation(educationArray[index]);
 		}
-		this.setState({
-			isEditMode: true,
-		});
+		setIsEditMode(true);
 	};
 
-	render() {
-		const { general, experienceArray, educationArray } = this.state;
-		return (
-			<div className='container'>
-				<div className='forms-container'>
-					<form>
-						<GeneralForm
-							handleInput={this.handleInputValue}
-							value={this.state}
-						></GeneralForm>
-					</form>
-					<form onSubmit={this.handleSubmit} name='experience'>
-						<ExperienceForm
-							handleInput={this.handleInputValue}
-							value={this.state}
-						/>
-					</form>
-					<form onSubmit={this.handleSubmit} name='education'>
-						<EducationForm
-							handleInput={this.handleInputValue}
-							value={this.state}
-						/>
-					</form>
-				</div>
-				<div className='cv-viewer'>
-					<GeneralViewer data={general} />
-					<ExperienceViewer
-						arrayData={experienceArray}
-						edit={this.handleEdit}
-						remove={this.handleRemove}
-					/>
-					<EducationView
-						arrayData={educationArray}
-						edit={this.handleEdit}
-						remove={this.handleRemove}
-					/>
-				</div>
+	return (
+		<div className='container'>
+			<div className='forms-container'>
+				<form>
+					<GeneralForm
+						handleInput={handleInputValue}
+						value={general}
+					></GeneralForm>
+				</form>
+				<form onSubmit={handleSubmit} name='experience'>
+					<ExperienceForm handleInput={handleInputValue} value={experience} />
+				</form>
+				<form onSubmit={handleSubmit} name='education'>
+					<EducationForm handleInput={handleInputValue} value={education} />
+				</form>
 			</div>
-		);
-	}
-}
+			<div className='cv-viewer'>
+				<GeneralViewer data={general} />
+				<ExperienceViewer
+					arrayData={experienceArray}
+					edit={handleEdit}
+					remove={handleRemove}
+				/>
+				<EducationView
+					arrayData={educationArray}
+					edit={handleEdit}
+					remove={handleRemove}
+				/>
+			</div>
+		</div>
+	);
+};
 
 export default App;
-
-// You should use class components for this project. You’re going to find a lot of code written using class components and this practical experience will help you understand it when encountered. You’ll also revisit this project in a later lesson to replace the class components with functional ones.
-// Think about how to structure your application into components. Your application should include:
-// A section to add general information like name, email, phone number.
-// A section to add your educational experience (school name, title of study, date of study)
-// A section to add practical experience (company name, position title, main tasks of your jobs, date from and until when you worked for that company)
-// Be sure to include an edit and submit button for each section or for the whole CV, your preference. The submit button should submit your form and display the value of your input fields in HTML elements. The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content. You’re going to make heavy use of state and props, so make sure you understood those concepts.
-// Create a components' folder in your src directory and add your components.
-// Include a styles' folder in your src directory for your CSS files. You’ll need to import these in the component files to use them.
-// Don’t forget to push your solution to GitHub. You should be proud of your work and show it off to the world!
-// Tip: If you’re confused on how to deploy using GitHub Pages, take a look at this article
