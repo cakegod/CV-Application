@@ -85,10 +85,10 @@ const App = () => {
 				if (!isEditMode) {
 					setExperienceArray(experienceArray.concat(experience));
 				} else {
-					const index = experienceArray.findIndex(
-						(item) => item.id === experience.id,
-					);
-					experienceArray.splice(index, 1, experience);
+					const arrayCopy = experienceArray.map((item) => {
+						return item.id === experience.id ? experience : item;
+					});
+					setExperienceArray(arrayCopy);
 					setIsEditMode(false);
 				}
 				setExperience({
@@ -104,11 +104,11 @@ const App = () => {
 				if (!isEditMode) {
 					setEducationArray(educationArray.concat(education));
 				} else {
-					const index = educationArray.findIndex(
-						(item) => item.id === education.id,
-					);
-					educationArray.splice(index, 1, education);
-					setEducation(false);
+					const arrayCopy = educationArray.map((item) => {
+						return item.id === experience.id ? experience : item;
+					});
+					setEducationArray(arrayCopy);
+					setIsEditMode(false);
 				}
 				setEducation({
 					school: '',
@@ -125,13 +125,9 @@ const App = () => {
 
 	const handleRemove = (id, section) => {
 		if (section === 'experience') {
-			const index = experienceArray.findIndex((item) => item.id === id);
-			experienceArray.splice(index, 1);
-			setExperienceArray(...experienceArray);
+			setExperienceArray(experienceArray.filter((item) => item.id !== id));
 		} else if (section === 'education') {
-			const index = educationArray.findIndex((item) => item.id === id);
-			educationArray.splice(index, 1);
-			setEducationArray(...educationArray);
+			setEducationArray(educationArray.filter((item) => item.id !== id));
 		}
 	};
 
