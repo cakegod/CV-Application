@@ -85,10 +85,11 @@ const App = () => {
 				if (!isEditMode) {
 					setExperienceArray(experienceArray.concat(experience));
 				} else {
-					const arrayCopy = experienceArray.map((item) => {
-						return item.id === experience.id ? experience : item;
-					});
-					setExperienceArray(arrayCopy);
+					setExperienceArray(
+						experienceArray.map((item) => {
+							return item.id === experience.id ? experience : item;
+						}),
+					);
 					setIsEditMode(false);
 				}
 				setExperience({
@@ -104,10 +105,11 @@ const App = () => {
 				if (!isEditMode) {
 					setEducationArray(educationArray.concat(education));
 				} else {
-					const arrayCopy = educationArray.map((item) => {
-						return item.id === experience.id ? experience : item;
-					});
-					setEducationArray(arrayCopy);
+					setEducationArray(
+						educationArray.map((item) => {
+							return item.id === experience.id ? experience : item;
+						}),
+					);
 					setIsEditMode(false);
 				}
 				setEducation({
